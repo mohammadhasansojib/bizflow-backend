@@ -55,3 +55,30 @@
         }
     }
     ```
+
+
+- **`POST /api/v1/auth/me`**
+    - auth: true
+
+    request body:
+    ```json
+    
+    ```
+
+    response:
+    ```json
+    {
+        "success": true,
+        "message": "user info retrived successfully",
+        "statusCode": 200,
+        "data": {
+            "user": {
+                "id": "1efe35e7-1df9-4b61-8e3d-e8e222517c76",
+                "username": "Sajib",
+                "email": "sajib@mail.com",
+                "createdAt": "2026-09-20T18:09:56.615Z",
+                "updatedAt": "2026-09-20T18:09:56.615Z"
+            }
+        }
+    }
+    ```
