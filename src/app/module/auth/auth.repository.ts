@@ -3,6 +3,19 @@ import type { IUserRegisterPayload } from "./auth.interface.js";
 
 
 class AuthRepository {
+    async getUserByIdFromDB(id: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                id,
+            },
+            omit: {
+                password: true,
+            }
+        });
+
+        return user;
+    }
+
     async getUserByEmailFromDB(email: string) {
         const user = await prisma.user.findUnique({
             where: {

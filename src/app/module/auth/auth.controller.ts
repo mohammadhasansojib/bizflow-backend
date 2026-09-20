@@ -3,6 +3,7 @@ import status from "http-status";
 import { catchAsync } from "../../utils/catchAsync.js";
 import { sendResponse } from "../../utils/sendResponse.js";
 import authService from "./auth.service.js";
+import { AuthorizationError } from "../../utils/errorFormats.js";
 
 const register = catchAsync(async (req: Request, res: Response) => {
 
@@ -41,10 +42,29 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
 
 })
 
+const getMe = catchAsync(async (req: Request, res: Response) => {
+    const id = req.user?.id;
+    if (!id) {
+        throw new AuthorizationError("invalid user id");
+    }
+
+    const user = await authService.getMe(id);
+
+    sendResponse(res, {
+        success: true,
+        message: "user info retrived successfully",
+        statusCode: status.OK,
+        data: {
+            user,
+        }
+    })
+})
+
 const authController = {
     register,
     login,
     logout,
     refreshToken,
+    getMe,
 }
 export default authController;

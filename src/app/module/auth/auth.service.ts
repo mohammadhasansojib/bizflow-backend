@@ -52,8 +52,18 @@ const login = async (payload: IUserLoginPayload) => {
 	};
 }
 
+const getMe = async (id: string) => {
+    const user = await authRepository.getUserByIdFromDB(id);
+    if (!user) {
+        throw new NotFoundError("user not found");
+    }
+
+    return user;
+}
+
 const authService = {
     register,
     login,
+    getMe,
 }
 export default authService;
