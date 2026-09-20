@@ -1,7 +1,8 @@
 import bcrypt from "bcryptjs";
 import config from "../../config/index.js";
-import { ConflictError } from "../../utils/errorFormats.js";
-import type { IUserRegisterPayload } from "./auth.interface.js";
+import { AuthorizationError, ConflictError, NotFoundError } from "../../utils/errorFormats.js";
+import { createAccessToken, createRefreshToken } from "../../utils/jwt.js";
+import type { IUserLoginPayload, IUserRegisterPayload } from "./auth.interface.js";
 import authRepository from "./auth.repository.js";
 
 
@@ -25,7 +26,34 @@ const register = async (payload: IUserRegisterPayload) => {
     return createdUser;
 }
 
+const login = async (payload: IUserLoginPayload) => {
+    const { email, password } = payload;
+
+	const user = await authRepository.getUserByEmailFromDB(email);
+	if (!user) {
+		throw new NotFoundError("user not found");
+	}
+
+	const isValidPass = await bcrypt.compare(password, user.password);
+	if (!isValidPass) {
+		throw new AuthorizationError("invalid password");
+	}
+
+	const tokenPayload = {
+		id: user.id,
+		email: user.email,
+	};
+	const accessToken = createAccessToken(tokenPayload);
+	const refreshToken = createRefreshToken(tokenPayload);
+
+	return {
+		accessToken,
+		refreshToken,
+	};
+}
+
 const authService = {
     register,
+    login,
 }
 export default authService;

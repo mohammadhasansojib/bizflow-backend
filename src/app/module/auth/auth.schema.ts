@@ -12,3 +12,11 @@ export const UserRegistrationSchema = z.object({
     .min(8, "password must be at least 8 characters")
     .max(30, "password can be at most 30 characters"),
 });
+
+export const UserLoginSchema = z.object({
+    email: z.email("invalid email address"),
+
+    password: z.string()
+    .min(8, "password must be at least 8 characters")
+    .max(30, "password can be at most 30 characters"),
+});

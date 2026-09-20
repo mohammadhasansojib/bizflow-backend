@@ -6,3 +6,8 @@ export interface IUserRegisterPayload {
     email: string
     password: string
 }
+
+export interface IUserLoginPayload {
+    email: string
+    password: string
+}

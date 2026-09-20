@@ -21,7 +21,16 @@ const register = catchAsync(async (req: Request, res: Response) => {
 })
 
 const login = catchAsync(async (req: Request, res: Response) => {
+    const payload = req.body;
 
+	const result = await authService.login(payload);
+
+	sendResponse(res, {
+		success: true,
+		message: "login successful",
+		statusCode: status.OK,
+		data: result,
+	});
 })
 
 const logout = catchAsync(async (req: Request, res: Response) => {
