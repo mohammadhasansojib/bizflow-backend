@@ -6,6 +6,7 @@ dotenv.config();
 const envSchema = z.object({
 	DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
 	PORT: z.coerce.number().min(1000, "PORT is required"),
+	BCRYPT_SALT_ROUND: z.coerce.number().min(1, "BCRYPT_SALT_ROUND is required"),
 });
 
 const env = envSchema.parse(process.env);
@@ -13,6 +14,7 @@ const env = envSchema.parse(process.env);
 export const config = {
 	DATABASE_URL: env.DATABASE_URL,
 	PORT: env.PORT,
+	BCRYPT_SALT_ROUND: env.BCRYPT_SALT_ROUND,
 };
 
 export default config;

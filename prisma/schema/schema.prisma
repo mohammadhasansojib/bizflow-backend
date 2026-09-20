@@ -12,8 +12,7 @@ datasource db {
   provider = "postgresql"
 }
 
-
 model Test {
-    id String @id @default(uuid())
-    value String?
+  id    String  @id @default(uuid())
+  value String?
 }
