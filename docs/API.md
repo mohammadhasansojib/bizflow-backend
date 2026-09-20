@@ -32,3 +32,26 @@
         }
     }
     ```
+
+- **`POST /api/v1/auth/login`**
+
+    request body:
+    ```json
+    {
+        "email": "sajib@mail.com",
+        "password": "12345678"
+    }
+    ```
+
+    response:
+    ```json
+    {
+        "success": true,
+        "message": "login successful",
+        "statusCode": 200,
+        "data": {
+            "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlZmUzNWU3LTFkZjktNGI2MS04ZTNkLWU4ZTIyMjUxN2M3NiIsImVtYWlsIjoic2FqaWJAbWFpbC5jb20iLCJpYXQiOjE3ODk5Mjk1ODksImV4cCI6MTc5MDAxNTk4OX0.sef4czRt-4kN38qFu_v2Odv51BaOcMI1fiSzn7kVGFo",
+            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlZmUzNWU3LTFkZjktNGI2MS04ZTNkLWU4ZTIyMjUxN2M3NiIsImVtYWlsIjoic2FqaWJAbWFpbC5jb20iLCJpYXQiOjE3ODk5Mjk1ODksImV4cCI6MTc5MDUzNDM4OX0.BkDPqX2p16GK8kCRUM6T7OlXQLeM0wE2t8zZ8vtwmtM"
+        }
+    }
+    ```
