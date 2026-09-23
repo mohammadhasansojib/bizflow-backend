@@ -1,3 +1,5 @@
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import express, {
 	type NextFunction,
 	type Request,
@@ -9,6 +11,14 @@ import { AppError } from "./utils/errorFormats.js";
 import { sendResponse } from "./utils/sendResponse.js";
 
 const app = express();
+
+//cors
+app.use(cors({
+	origin: "http://localhost:3000",
+	credentials: true,
+}));
+// cookie parser
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
