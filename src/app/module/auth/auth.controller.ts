@@ -35,7 +35,37 @@ const login = catchAsync(async (req: Request, res: Response) => {
 })
 
 const logout = catchAsync(async (req: Request, res: Response) => {
+    if (!req.user) {
+        return sendResponse(res, {
+            success: false,
+            message: "user not found",
+            statusCode: status.UNAUTHORIZED,
+            data: null,
+        })
+    };
+    const {email} = req.user;
 
+    res.clearCookie("accessToken", {
+        path: "/",
+        httpOnly: true,
+        secure: false,
+    });
+    res.clearCookie("refreshToken", {
+        path: "/",
+        httpOnly: true,
+        secure: false,
+    });
+
+    sendResponse(res, {
+        success: true,
+        message: "Logout successfully",
+        statusCode: status.OK,
+        data: {
+            user: {
+                email,
+            }
+        },
+    })
 })
 
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
