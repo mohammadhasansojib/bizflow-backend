@@ -7,6 +7,7 @@ import express, {
 } from "express";
 import { prisma } from "./lib/prisma.js";
 import authRoutes from "./module/auth/auth.route.js";
+import productRoutes from "./module/product/product.route.js";
 import { AppError } from "./utils/errorFormats.js";
 import { sendResponse } from "./utils/sendResponse.js";
 
@@ -25,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/products", productRoutes);
 
 app.get("/", (_req: Request, res: Response) => {
 	res.send("Server Running...");
