@@ -5,6 +5,7 @@ import express, {
 	type Request,
 	type Response,
 } from "express";
+import config from "./config/index.js";
 import { prisma } from "./lib/prisma.js";
 import authRoutes from "./module/auth/auth.route.js";
 import productRoutes from "./module/product/product.route.js";
@@ -15,7 +16,7 @@ const app = express();
 
 //cors
 app.use(cors({
-	origin: "http://localhost:3000",
+	origin: config.FRONTEND_URL,
 	credentials: true,
 }));
 // cookie parser

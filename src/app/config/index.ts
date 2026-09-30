@@ -12,6 +12,7 @@ const envSchema = z.object({
 	ACCESS_TOKEN_EXPIRES: z.coerce.number().min(1, "ACCESS_TOKEN_EXPIRES is required"),
 	REFRESH_TOKEN_SECRET: z.string().min(1, "REFRESH_TOKEN_SECRET is required"),
 	REFRESH_TOKEN_EXPIRES: z.coerce.number().min(1, "REFRESH_TOKEN_EXPIRES is required"),
+	FRONTEND_URL: z.string().min(1, "FRONTEND_URL is required"),
 });
 
 const env = envSchema.parse(process.env);
@@ -25,6 +26,7 @@ export const config = {
 	ACCESS_TOKEN_EXPIRES: env.ACCESS_TOKEN_EXPIRES,
 	REFRESH_TOKEN_SECRET: env.REFRESH_TOKEN_SECRET,
 	REFRESH_TOKEN_EXPIRES: env.REFRESH_TOKEN_EXPIRES,
+	FRONTEND_URL: env.FRONTEND_URL,
 };
 
 export default config;
